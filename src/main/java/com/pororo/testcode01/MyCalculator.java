@@ -39,7 +39,6 @@ public class MyCalculator {
     }
 
     public static class ZeroDivisionException extends RuntimeException{
-
     }
 
 }
