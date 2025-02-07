@@ -6,10 +6,10 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-22.04  # 최신 LTS 버전 사용
+    runs-on: ubuntu-latest  # 최신 LTS 버전 사용
     permissions:
-      checks: write
-      contents: read
+      checks: write # 체크 실행 결과 표시 권한
+      contents: read # 저장소 read 권한
       pull-requests: write  # PR에 코멘트 작성 허용
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew --info test
 
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
+        uses: EnricoMi/publish-unit-test-result-action@v2 # JUnit, NUnit, xUnit 등의 테스트 결과를 자동으로 PR에 표시하는 GitHub Action
         if: always()
         with:
-          junit_files: '**/build/test-results/test/TEST-*.xml'
+          junit_files: '**/build/test-results/test/TEST-*.xml' # gradle의 테스트 결과 파일
