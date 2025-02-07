@@ -2,28 +2,27 @@ name: Test
 
 on:
   push:
-    branches: [ master ]    # master 브랜치에 PR 보낼 때 실행
+    branches: [ master ]  # master 브랜치에 push 시 실행
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04  # 최신 LTS 버전 사용
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: gradle  # Gradle 캐싱 활성화
 
-        # Gradle Wrapper 권한 부여
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-        # Gradle Test를 실행한다
       - name: Test with Gradle
         run: ./gradlew --info test
 
-        # Test 후 Report 생성
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
