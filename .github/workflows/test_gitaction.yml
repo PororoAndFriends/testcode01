@@ -1,7 +1,7 @@
 name: Test
 
 on:
-  push:
+  pull_request:
     branches: [ master ]  # master 브랜치에 push 시 실행
 
 jobs:
