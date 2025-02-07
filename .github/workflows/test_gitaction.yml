@@ -1,7 +1,7 @@
 name: Test
 
 on:
-  pull_request:
+  push:
     branches: [ master ]    # master 브랜치에 PR 보낼 때 실행
 
 jobs:
