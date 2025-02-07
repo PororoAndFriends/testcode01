@@ -7,6 +7,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-22.04  # 최신 LTS 버전 사용
+    permissions:
+      checks: write
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
