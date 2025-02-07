@@ -10,7 +10,7 @@ jobs:
     permissions:
       checks: write
       contents: read
-      packages: write
+      pull-requests: write  # PR에 코멘트 작성 허용
     steps:
       - uses: actions/checkout@v4
 
