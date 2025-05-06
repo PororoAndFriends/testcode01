@@ -36,6 +36,8 @@ dependencies {
     testImplementation "org.mockito:mockito-core:3.+"
     testImplementation 'org.testcontainers:testcontainers'
     testImplementation "com.redis.testcontainers:testcontainers-redis-junit:1.6.4"
+
+    testImplementation 'com.tngtech.archunit:archunit:1.+'
 }
 
 tasks.named('test') {
