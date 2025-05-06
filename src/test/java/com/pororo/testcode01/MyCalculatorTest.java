@@ -6,70 +6,64 @@ import org.junit.jupiter.api.Test;
 
 class MyCalculatorTest {
 
-    @Test
-    void addTest() {
-        // AAA 패턴
+  @Test
+  void addTest() {
+    // AAA 패턴
 
-        // Arrange : 준비
-        MyCalculator myCalculator = new MyCalculator(10.0);
+    // Arrange : 준비
+    MyCalculator myCalculator = new MyCalculator(10.0);
 
-        // Act : 행동
-        myCalculator.add(10.0);
+    // Act : 행동
+    myCalculator.add(10.0);
 
-        // Assert : 단언/검증
-        Assertions.assertEquals(20.0, myCalculator.getResult());
-    }
+    // Assert : 단언/검증
+    Assertions.assertEquals(20.0, myCalculator.getResult());
+  }
 
-    @Test
-    void minusTest() {
-        // GWT 패턴
+  @Test
+  void minusTest() {
+    // GWT 패턴
 
-        // Given : 준비
-        MyCalculator myCalculator = new MyCalculator(10.0);
+    // Given : 준비
+    MyCalculator myCalculator = new MyCalculator(10.0);
 
-        // When : 행동
-        myCalculator.minus(5.0);
+    // When : 행동
+    myCalculator.minus(5.0);
 
-        // Then : 단언/검증
-        Assertions.assertEquals(5.0, myCalculator.getResult());
-    }
+    // Then : 단언/검증
+    Assertions.assertEquals(5.0, myCalculator.getResult());
+  }
 
-    @Test
-    void multiplyTest() {
-        MyCalculator myCalculator = new MyCalculator(2.0);
-        myCalculator.multiply(2.0);
+  @Test
+  void multiplyTest() {
+    MyCalculator myCalculator = new MyCalculator(2.0);
+    myCalculator.multiply(2.0);
 
-        Assertions.assertEquals(4.0, myCalculator.getResult());
-    }
+    Assertions.assertEquals(4.0, myCalculator.getResult());
+  }
 
-    @Test
-    void divideTest() {
-        MyCalculator myCalculator = new MyCalculator(4.0);
-        myCalculator.divide(2.0);
+  @Test
+  void divideTest() {
+    MyCalculator myCalculator = new MyCalculator(4.0);
+    myCalculator.divide(2.0);
 
-        Assertions.assertEquals(2.0, myCalculator.getResult());
-    }
+    Assertions.assertEquals(2.0, myCalculator.getResult());
+  }
 
-    @Test
-    void complicatedCalculateTest() {
-        MyCalculator myCalculator = new MyCalculator(4.0);
-        Double result = myCalculator
-                .add(10.0)
-                .minus(5.0)
-                .multiply(2.0)
-                .divide(2.0)
-                .getResult();
+  @Test
+  void complicatedCalculateTest() {
+    MyCalculator myCalculator = new MyCalculator(4.0);
+    Double result = myCalculator.add(10.0).minus(5.0).multiply(2.0).divide(2.0).getResult();
 
-        Assertions.assertEquals(9.0, result);
-    }
+    Assertions.assertEquals(9.0, result);
+  }
 
-    @Test
-    void zeroDivisionTest() {
-        // given
-        MyCalculator myCalculator = new MyCalculator(4.0);
+  @Test
+  void zeroDivisionTest() {
+    // given
+    MyCalculator myCalculator = new MyCalculator(4.0);
 
-        // when & then
-        Assertions.assertThrows(ZeroDivisionException.class, () -> myCalculator.divide(0.0));
-    }
-
+    // when & then
+    Assertions.assertThrows(ZeroDivisionException.class, () -> myCalculator.divide(0.0));
+  }
 }

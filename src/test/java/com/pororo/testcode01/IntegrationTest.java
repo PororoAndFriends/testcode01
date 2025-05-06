@@ -30,7 +30,8 @@ public class IntegrationTest {
             .withExposedService(
                 "local-db", // Docker-Compose 내의 서비스 명
                 3306, // 노출할 포트 번호
-                Wait.forLogMessage(".*ready for connections.*", 1) // 대기 조건, 컨테이너를 띄워보고 로그를 통해 확인해 보아야 함
+                Wait.forLogMessage(
+                        ".*ready for connections.*", 1) // 대기 조건, 컨테이너를 띄워보고 로그를 통해 확인해 보아야 함
                     .withStartupTimeout(Duration.ofSeconds(300)))
             .withExposedService(
                 "local-db-migrate",
@@ -42,7 +43,6 @@ public class IntegrationTest {
 
     redis = new RedisContainer(RedisContainer.DEFAULT_IMAGE_NAME.withTag("6"));
     redis.start();
-
   }
 
   static class IntegrationTestInitializer
@@ -53,7 +53,8 @@ public class IntegrationTest {
       Map<String, String> properties = new HashMap<>();
 
       var rdbmsHost = rdbms.getServiceHost("local-db", 3306);
-      var rdbmsPort = rdbms.getServicePort("local-db", 3306); // TestContainers에서는 실행마다 실제 포트 번호가 달라질 수 있음
+      var rdbmsPort =
+          rdbms.getServicePort("local-db", 3306); // TestContainers에서는 실행마다 실제 포트 번호가 달라질 수 있음
 
       properties.put("spring.redis.host", redis.getHost());
       properties.put("spring.redis.port", String.valueOf(redis.getFirstMappedPort()));

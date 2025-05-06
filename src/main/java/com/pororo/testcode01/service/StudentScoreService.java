@@ -1,14 +1,14 @@
 package com.pororo.testcode01.service;
 
 import com.pororo.testcode01.MyCalculator;
+import com.pororo.testcode01.controller.response.ExamFailStudentResponse;
+import com.pororo.testcode01.controller.response.ExamPassStudentResponse;
 import com.pororo.testcode01.model.StudentFail;
 import com.pororo.testcode01.model.StudentPass;
 import com.pororo.testcode01.model.StudentScore;
 import com.pororo.testcode01.repository.StudentFailRepository;
 import com.pororo.testcode01.repository.StudentPassRepository;
 import com.pororo.testcode01.repository.StudentScoreRepository;
-import com.pororo.testcode01.controller.response.ExamFailStudentResponse;
-import com.pororo.testcode01.controller.response.ExamPassStudentResponse;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

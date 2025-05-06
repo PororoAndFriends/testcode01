@@ -16,11 +16,7 @@ public class ScoreApi {
   @PutMapping("/exam/{exam}/score")
   public void save(@PathVariable("exam") String exam, @RequestBody SaveExamScoreRequest request) {
     studentScoreService.saveScore(
-        request.studentName(),
-        exam,
-        request.korScore(),
-        request.engScore(),
-        request.mathScore());
+        request.studentName(), exam, request.korScore(), request.engScore(), request.mathScore());
   }
 
   @GetMapping("/exam/{exam}/pass")

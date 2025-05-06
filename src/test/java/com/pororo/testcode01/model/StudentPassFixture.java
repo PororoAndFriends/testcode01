@@ -1,6 +1,5 @@
 package com.pororo.testcode01.model;
 
-
 import com.pororo.testcode01.MyCalculator;
 
 public class StudentPassFixture {
