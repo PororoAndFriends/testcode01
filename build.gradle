@@ -3,6 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.4.2'
     id 'io.spring.dependency-management' version '1.1.7'
     id 'jacoco'
+    id 'com.diffplug.spotless' version '6.21.0'
 }
 
 group = 'com.pororo'
@@ -92,4 +93,20 @@ tasks.jacocoTestCoverageVerification {
             )
         }
     }
+}
+
+spotless {
+    java {
+        googleJavaFormat() // 구글 java 포멧 사용
+
+        removeUnusedImports() // 사용하지 않는 import문 제거
+        trimTrailingWhitespace() // 불필요한 공백 제거
+        indentWithSpaces(4) // 들여쓰기를 띄워쓰기로 바꿔줌
+        endWithNewline() // 마지막 줄 공백
+    }
+}
+
+tasks.register('addGitPrecommitHook', Copy) {
+    from 'script/pre-commit'
+    into '.git/hooks'
 }
