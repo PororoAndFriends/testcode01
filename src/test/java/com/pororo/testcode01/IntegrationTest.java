@@ -1,5 +1,6 @@
 package com.pororo.testcode01;
 
+import com.redis.testcontainers.RedisContainer;
 import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
@@ -21,6 +22,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 public class IntegrationTest {
 
   static ComposeContainer rdbms;
+  static RedisContainer redis;
 
   static {
     rdbms =
@@ -38,6 +40,9 @@ public class IntegrationTest {
 
     rdbms.start();
 
+    redis = new RedisContainer(RedisContainer.DEFAULT_IMAGE_NAME.withTag("6"));
+    redis.start();
+
   }
 
   static class IntegrationTestInitializer
@@ -50,10 +55,11 @@ public class IntegrationTest {
       var rdbmsHost = rdbms.getServiceHost("local-db", 3306);
       var rdbmsPort = rdbms.getServicePort("local-db", 3306); // TestContainers에서는 실행마다 실제 포트 번호가 달라질 수 있음
 
+      properties.put("spring.redis.host", redis.getHost());
+      properties.put("spring.redis.port", String.valueOf(redis.getFirstMappedPort()));
+
       properties.put(
           "spring.datasource.url", "jdbc:mysql://" + rdbmsHost + ":" + rdbmsPort + "/score");
-
-
       TestPropertyValues.of(properties).applyTo(applicationContext);
     }
   }

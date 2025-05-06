@@ -11,6 +11,7 @@ import com.pororo.testcode01.model.StudentScoreTestDataBuilder;
 import com.pororo.testcode01.repository.StudentFailRepository;
 import com.pororo.testcode01.repository.StudentPassRepository;
 import com.pororo.testcode01.repository.StudentScoreRepository;
+import com.pororo.testcode01.service.StudentScoreService;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
