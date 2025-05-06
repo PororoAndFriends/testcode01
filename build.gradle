@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.2'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'jacoco'
 }
 
 group = 'com.pororo'
@@ -40,6 +41,55 @@ dependencies {
     testImplementation 'com.tngtech.archunit:archunit:1.+'
 }
 
+jacoco {
+    toolVersion "0.8.13"
+}
+
+tasks.jacocoTestReport{
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = true
+
+        xml.destination(file("build/jacoco/jacoco.xml"))
+        html.destination(file("build/jacoco/jacoco.html"))
+    }
+
+    finalizedBy(tasks.jacocoTestCoverageVerification)
+}
+
 tasks.named('test') {
     useJUnitPlatform()
+
+    jacoco {}
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true
+            element = "CLASS" // Class별 검사
+
+            // Line의 CoveredRatio를 통해 테스트 성공 비율을 정함
+            limit {
+                counter = "LINE"
+                value = "COVEREDRATIO"
+                minimum = BigDecimal.valueOf(0.1)
+            }
+
+            // Class는 100줄이상의 코드를 가질 수 없도록 제한
+            limit {
+                counter = "LINE"
+                value = "TOTALCOUNT"
+                maximum = BigDecimal.valueOf(100)
+            }
+
+            excludes = List.of(
+                    "*.controller.*",
+                    "com.pororo.testcode01.Testcode01Application",
+                    "com.pororo.testcode01.MyCalculatorApplication"
+            )
+        }
+    }
 }
